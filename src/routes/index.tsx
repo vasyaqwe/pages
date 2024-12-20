@@ -6,6 +6,11 @@ import {
    DrawerTitle,
    DrawerTrigger,
 } from "@/ui/components/drawer"
+import { EditorContent, EditorRoot } from "@/ui/components/editor"
+import { placeholder, starterKit } from "@/ui/components/editor/extensions"
+import { link } from "@/ui/components/editor/link/extension"
+import type { EditorInstance } from "@/ui/components/editor/types"
+import { isOnFirstLine } from "@/ui/components/editor/utils"
 import { formatDateRelative } from "@/utils/format"
 import { Link, createFileRoute, useRouter } from "@tanstack/react-router"
 import { desc } from "drizzle-orm"
@@ -28,8 +33,11 @@ export const Route = createFileRoute("/")({
 function RouteComponent() {
    const { db } = Route.useRouteContext()
    const { notes } = Route.useLoaderData()
-   const [drawerOpen, setDrawerOpen] = React.useState(false)
    const router = useRouter()
+   const [drawerOpen, setDrawerOpen] = React.useState(false)
+   const [content, setContent] = React.useState("")
+   const titleRef = React.useRef<HTMLInputElement>(null)
+   const contentRef = React.useRef<EditorInstance>(null)
 
    return (
       <div className="container pt-8 md:pt-12">
@@ -62,7 +70,8 @@ function RouteComponent() {
                   <DrawerTitle className="sr-only">
                      Write a new note
                   </DrawerTitle>
-                  <form
+                 <div className="flex h-full flex-col overflow-y-auto">
+                 <form
                      onSubmit={async (e) => {
                         e.preventDefault()
                         const { title } = Object.fromEntries(
@@ -73,17 +82,60 @@ function RouteComponent() {
                         setDrawerOpen(false)
                         router.invalidate()
                      }}
-                     className="container pt-10"
+                     className="container flex flex-1 flex-col items-start py-10"
                   >
                      <input
+                        ref={titleRef}
                         autoFocus
                         className="h-10 w-full border-none bg-transparent font-bold text-xl outline-hidden"
                         placeholder="Title"
                         name="title"
                         type="text"
+                        autoComplete="off"
+                        onKeyDown={(e) => {
+                           if (e.key === "ArrowDown") {
+                              e.preventDefault()
+                              contentRef.current?.commands.focus("start")
+                           }
+                        }}
                      />
-                     <Button className="mt-5">DONE</Button>
+                     <EditorRoot>
+                        <EditorContent
+                           onCreate={({ editor }) => {
+                              contentRef.current = editor
+                           }}
+                           className="mt-3 mb-7"
+                           content={content}
+                           extensions={[
+                              starterKit,
+                              placeholder("Write details (markdown supported)"),
+                              link,
+                           ]}
+                           onUpdate={({ editor }) => {
+                              setContent(editor.getHTML())
+                           }}
+                           editorProps={{
+                              handleKeyDown: (view, e) => {
+                                 if (e.key === "ArrowUp") {
+                                    if (!isOnFirstLine(view)) return false
+
+                                    titleRef.current?.focus()
+                                    titleRef.current?.setSelectionRange(
+                                       titleRef.current?.value.length,
+                                       titleRef.current?.value.length,
+                                    )
+                                    return true
+                                 }
+
+                                 return false
+                              },
+                           }}
+                           placeholder="Add description (press '/' for commands)"
+                        />
+                     </EditorRoot>
+                     <Button className="mt-auto">DONE</Button>
                   </form>
+                 </div>
                </DrawerContent>
             </Drawer>
          </div>

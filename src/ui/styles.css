@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import '../ui/components/editor/styles.css';
 @plugin "@tailwindcss/typography";
 
 @theme default {

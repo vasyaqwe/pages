@@ -1,0 +1,35 @@
+.prose > :first-child,
+.prose > :first-child > li > p.is-empty {
+   margin-top: 0;
+}
+
+div.ProseMirror > p.is-editor-empty:first-child::before {
+   content: attr(data-placeholder);
+   float: left;
+   color: var(--color-foreground);
+   opacity: 0.4;
+   pointer-events: none;
+   height: 0;
+}
+.prose ol li::marker {
+   color: var(--color-foreground);
+   font-size: var(--text-base);
+   font-weight: 500;
+}
+.prose ul,
+.prose ul li,
+.prose ol li{
+   padding: 0;
+}
+.prose ul li p {
+   margin: 0;
+   display: inline-block;
+}
+.prose ul li:before {
+   content: "-";
+   display: inline-block;
+   margin-right: 0.5em;
+   transform: translateY(-1px);
+   font-weight: 500;
+   color: var(--color-foreground);
+}
