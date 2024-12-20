@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme default {
+   --color-background: #ffffff;
+   --color-foreground: #2a2c32;
+   --color-primary: #0a0a0b;
+   --color-secondary: #eeedef;
+   --color-tertiary: #f8f8f9;
+   --color-border: #e9e8ea;
+   --color-muted: #c5c5c5;
+
+   --text-xs: 0.8rem;
+   --text-base: 0.925rem;
+   --text-lg: 0.95rem;
+
+   --breakpoint-xs: 402px;
+
+   --font-primary: "jet_brains_mono", monospace;
+}
+
+* {
+   scrollbar-width: thin;
+   scrollbar-color: var(--color-muted) transparent;
+}
+
+@utility container {
+   padding-inline: 0.875rem;
+   margin-inline: auto;
+   max-width: 824px;
+}
+
+@layer utilities {
+   @media (max-width: 768px) {
+      .pb-safe {
+         padding-bottom: max(env(safe-area-inset-bottom), 0rem);
+      }
+      .pb-safe-1 {
+         padding-bottom: max(env(safe-area-inset-bottom), 0.25rem);
+      }
+      .pb-safe-2 {
+         padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+      }
+      .pb-safe-3 {
+         padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+      }
+      .pb-safe-4 {
+         padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+      }
+   }
+}
+
+html {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   font-family: var(--font-primary);
+}
+body {
+   font-size: var(--text-base);
+   font-weight: 400;
+}
+
+/* reset */
+.scrollbar-hidden {
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+   display: none !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   text-wrap: balance;
+}
+
+p {
+   text-wrap: pretty;
+}
