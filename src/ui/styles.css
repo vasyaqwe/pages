@@ -2,13 +2,15 @@
 @plugin "@tailwindcss/typography";
 
 @theme default {
-   --color-background: #ffffff;
-   --color-foreground: #2a2c32;
-   --color-primary: #0a0a0b;
-   --color-secondary: #eeedef;
-   --color-tertiary: #f8f8f9;
-   --color-border: #e9e8ea;
-   --color-muted: #c5c5c5;
+   --color-background: light-dark(#ffffff, #171716);
+   --color-foreground: light-dark(#2a2c32, #f3f3f5);
+   --color-primary: light-dark(#0a0a0b, #3c3c39);
+   --color-primary-foreground: light-dark(#f3f3f5, #f3f3f5);
+   --color-popover: light-dark(#171716, #2f2f2d);
+   --color-border: light-dark(#e9e8ea, #343432);
+   --color-muted: light-dark(#c5c5c5, #7a7a7a);
+   --color-elevated-1: light-dark(#f6f6f7, #232321);
+   --color-elevated-2: light-dark(#4b4b4a, #464644);
 
    --text-xs: 0.8rem;
    --text-base: 0.925rem;
