@@ -29,7 +29,7 @@
 @utility container {
    padding-inline: 0.875rem;
    margin-inline: auto;
-   max-width: 824px;
+   max-width: 704px;
 }
 
 @layer utilities {

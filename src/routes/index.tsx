@@ -32,7 +32,7 @@ function RouteComponent() {
    const router = useRouter()
 
    return (
-      <div className="pt-12">
+      <div className="container pt-8 md:pt-12">
          <div className="flex items-center justify-between border-border border-t pt-5">
             <p className="text-foreground/80">
                {notes.length === 0 ? "EMPTY" : `${notes.length} NOTES`}

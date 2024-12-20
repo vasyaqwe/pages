@@ -31,9 +31,9 @@ function RootComponent() {
 
    return (
       <Meta>
-         <main className="container">
+         <main>
             <Outlet />
-            <div className="-translate-x-1/2 fixed bottom-5 left-1/2 flex items-center rounded-full bg-popover p-1 text-popover-foreground shadow-lg">
+            <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center rounded-full bg-popover p-1 text-popover-foreground shadow-lg">
                <Button
                   onClick={() =>
                      setTheme(resolvedTheme === "light" ? "dark" : "light")
