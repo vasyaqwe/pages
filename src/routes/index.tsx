@@ -16,6 +16,7 @@ import { formatDateRelative } from "@/utils/format"
 import { Link, createFileRoute, useRouter } from "@tanstack/react-router"
 import { desc } from "drizzle-orm"
 import * as React from "react"
+import { useHotkeys } from "react-hotkeys-hook"
 
 export const Route = createFileRoute("/")({
    component: RouteComponent,
@@ -35,10 +36,17 @@ function RouteComponent() {
    const { db } = Route.useRouteContext()
    const { notes } = Route.useLoaderData()
    const router = useRouter()
+
    const [drawerOpen, setDrawerOpen] = React.useState(false)
    const [content, setContent] = React.useState("")
+
    const titleRef = React.useRef<HTMLInputElement>(null)
    const contentRef = React.useRef<EditorInstance>(null)
+
+   useHotkeys("w", (e) => {
+      e.preventDefault()
+      setDrawerOpen(true)
+   })
 
    return (
       <div className="container pt-8 md:pt-12">

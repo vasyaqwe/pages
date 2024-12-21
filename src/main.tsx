@@ -12,7 +12,7 @@ const router = createRouter({
    context: {
       db,
    },
-   defaultPreload: false,
+   defaultPreload: "render",
    defaultPendingComponent: () => (
       <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 w-full">
          <Icons.feather className="mx-auto size-6 animate-fade-in opacity-0 drop-shadow-md [--animation-delay:100ms]" />

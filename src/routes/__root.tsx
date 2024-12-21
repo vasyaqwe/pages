@@ -1,4 +1,5 @@
 import type { Database } from "@/db"
+import { useSound } from "@/interactions/use-sound"
 import { Button } from "@/ui/components/button"
 import {
    Outlet,
@@ -7,6 +8,7 @@ import {
 } from "@tanstack/react-router"
 import { useTheme } from "next-themes"
 import { type ReactNode, useEffect } from "react"
+import { useHotkeys } from "react-hotkeys-hook"
 
 export const Route = createRootRouteWithContext<{
    db: Database
@@ -29,15 +31,28 @@ function RootComponent() {
       }
    }, [resolvedTheme])
 
+   const sound = useSound("/sound/tap.wav")
+
+   useHotkeys(
+      "t",
+      (e) => {
+         e.preventDefault()
+         setTheme(resolvedTheme === "light" ? "dark" : "light")
+         sound.play()
+      },
+      [resolvedTheme],
+   )
+
    return (
       <Meta>
          <main>
             <Outlet />
             <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center rounded-full bg-popover p-1 text-popover-foreground shadow-lg">
                <Button
-                  onClick={() =>
+                  onClick={() => {
                      setTheme(resolvedTheme === "light" ? "dark" : "light")
-                  }
+                     sound.play()
+                  }}
                   size={"icon"}
                   variant={"popover-item"}
                   className={"rounded-full"}

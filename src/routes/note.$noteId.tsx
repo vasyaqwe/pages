@@ -13,10 +13,12 @@ import {
    createFileRoute,
    notFound,
    useBlocker,
+   useNavigate,
    useRouter,
 } from "@tanstack/react-router"
 import { eq } from "drizzle-orm"
 import * as React from "react"
+import { useHotkeys } from "react-hotkeys-hook"
 
 export const Route = createFileRoute("/note/$noteId")({
    component: RouteComponent,
@@ -37,10 +39,22 @@ function RouteComponent() {
    const { db } = Route.useRouteContext()
    const { note } = Route.useLoaderData()
    const router = useRouter()
+   const navigate = useNavigate()
 
    const titleRef = React.useRef<HTMLInputElement>(null)
    const contentRef = React.useRef<EditorInstance>(null)
    const [content, setContent] = React.useState(note.content)
+
+   useHotkeys(
+      "escape",
+      (e) => {
+         e.preventDefault()
+         navigate({ to: "/" })
+      },
+      {
+         enableOnContentEditable: true,
+      },
+   )
 
    const debouncedSaveTitle = useDebounceCallback(async (title) => {
       await db
