@@ -20,6 +20,7 @@
       "@radix-ui/react-dialog": "^1.1.4",
       "@tailwindcss/postcss": "^4.0.0-beta.2",
       "@tanstack/react-router": "^1.91.3",
+      "@tanstack/router-plugin": "^1.91.1",
       "@tiptap/extension-link": "^2.8.0",
       "@tiptap/extension-placeholder": "^2.8.0",
       "@tiptap/pm": "^2.8.0",
