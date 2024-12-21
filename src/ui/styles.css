@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import '../ui/components/editor/styles.css';
+@import "../ui/components/editor/styles.css";
 @plugin "@tailwindcss/typography";
 
 @theme default {
@@ -17,7 +17,7 @@
    --text-base: 0.925rem;
    --text-lg: 0.95rem;
    --text-xl: 1.07rem;
-   --text-2xl: 1.175rem; 
+   --text-2xl: 1.175rem;
 
    --breakpoint-xs: 402px;
 

@@ -18,7 +18,7 @@ div.ProseMirror > p.is-editor-empty:first-child::before {
 }
 .prose ul,
 .prose ul li,
-.prose ol li{
+.prose ol li {
    padding: 0;
 }
 .prose ul li p {
