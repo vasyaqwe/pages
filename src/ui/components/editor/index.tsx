@@ -50,15 +50,16 @@ export const EditorContent = React.forwardRef<
             : ""
 
       const baseClassName = cn(
-         "prose mt-2 min-h-9 max-w-full break-words prose-img:m-0 prose-p:m-0 prose-h2:mt-0 prose-h1:mb-3 prose-h2:mb-3 prose-p:leading-normal",
+         "prose mt-2 min-h-9 w-full max-w-full break-words prose-img:m-0 prose-p:my-2 prose-h2:mt-0 prose-h1:mb-3 prose-h2:mb-3 prose-p:leading-normal",
          "prose-code:after:hidden prose-code:before:hidden prose-ol:pl-4 prose-ol:pl-[1.675rem] prose-h3:font-bold prose-code:text-sm prose-h1:text-2xl prose-strong:text-foreground",
-         "prose-h2:text-xl prose-h3:text-[1.1rem] prose-headings:text-foreground prose-p:text-base prose-p:text-foreground focus:outline-hidden",
+         "prose-h2:text-xl prose-h3:text-lg prose-headings:text-foreground prose-p:text-base prose-p:text-foreground focus:outline-hidden",
+         "prose-hr:my-4",
       )
 
       return (
          <div
             ref={ref}
-            className={cn("", className)}
+            className={cn("w-full", className)}
          >
             {editor === null ? (
                <>

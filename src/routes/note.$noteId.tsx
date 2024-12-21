@@ -1,14 +1,22 @@
 import { useDebounceCallback } from "@/interactions/use-debounced-value"
 import { note as noteSchema } from "@/note/schema"
 import { buttonVariants } from "@/ui/components/button"
+import { EditorContent, EditorRoot } from "@/ui/components/editor"
+import { placeholder, starterKit } from "@/ui/components/editor/extensions"
+import { link } from "@/ui/components/editor/link/extension"
+import type { EditorInstance } from "@/ui/components/editor/types"
+import { isOnFirstLine } from "@/ui/components/editor/utils"
+import { Icons } from "@/ui/components/icons"
 import { cn } from "@/ui/utils"
 import {
    Link,
    createFileRoute,
    notFound,
+   useBlocker,
    useRouter,
 } from "@tanstack/react-router"
 import { eq } from "drizzle-orm"
+import * as React from "react"
 
 export const Route = createFileRoute("/note/$noteId")({
    component: RouteComponent,
@@ -30,6 +38,10 @@ function RouteComponent() {
    const { note } = Route.useLoaderData()
    const router = useRouter()
 
+   const titleRef = React.useRef<HTMLInputElement>(null)
+   const contentRef = React.useRef<EditorInstance>(null)
+   const [content, setContent] = React.useState(note.content)
+
    const debouncedSaveTitle = useDebounceCallback(async (title) => {
       await db
          .update(noteSchema)
@@ -38,6 +50,34 @@ function RouteComponent() {
 
       router.invalidate()
    }, 700)
+
+   const debouncedSaveContent = useDebounceCallback(async (content) => {
+      await db
+         .update(noteSchema)
+         .set({ content })
+         .where(eq(noteSchema.id, note.id))
+
+      router.invalidate()
+   }, 700)
+
+   useBlocker({
+      enableBeforeUnload: false,
+      shouldBlockFn: async () => {
+         await db
+            .update(noteSchema)
+            .set({ title: titleRef.current?.value })
+            .where(eq(noteSchema.id, note.id))
+
+         await db
+            .update(noteSchema)
+            .set({ content })
+            .where(eq(noteSchema.id, note.id))
+
+         router.invalidate()
+
+         return false
+      },
+   })
 
    return (
       <div className="absolute inset-0 bg-elevated-1 p-2.5">
@@ -50,44 +90,58 @@ function RouteComponent() {
                      "cursor-default rounded-full",
                   )}
                >
-                  <svg
-                     xmlns="http://www.w3.org/2000/svg"
-                     className="size-4"
-                     viewBox="0 0 18 18"
-                  >
-                     <g fill="currentColor">
-                        <path
-                           d="M14 4L4 14"
-                           stroke="currentColor"
-                           strokeWidth="2"
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                           fill="none"
-                        />
-                        <path
-                           d="M4 4L14 14"
-                           stroke="currentColor"
-                           strokeWidth="2"
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                           fill="none"
-                        />
-                     </g>
-                  </svg>
+                  <Icons.xMark className="size-4" />
                </Link>
             </div>
             <div className="container mt-4">
                <input
+                  ref={titleRef}
                   autoComplete="off"
                   defaultValue={note.title}
                   onChange={async (e) =>
                      await debouncedSaveTitle(e.target.value)
                   }
-                  className="h-10 w-full border-none bg-transparent font-bold text-xl outline-hidden"
+                  className="h-10 w-full border-none bg-transparent font-bold text-2xl outline-hidden"
                   placeholder="Title"
                   name="title"
                   type="text"
                />
+               <EditorRoot>
+                  <EditorContent
+                     autofocus={"end"}
+                     onCreate={({ editor }) => {
+                        contentRef.current = editor
+                     }}
+                     className="mt-3 mb-7"
+                     content={note.content}
+                     extensions={[
+                        starterKit,
+                        placeholder("Write details (markdown supported)"),
+                        link,
+                     ]}
+                     onUpdate={async ({ editor }) => {
+                        setContent(editor.getHTML())
+                        await debouncedSaveContent(editor.getHTML())
+                     }}
+                     editorProps={{
+                        handleKeyDown: (view, e) => {
+                           if (e.key === "ArrowUp") {
+                              if (!isOnFirstLine(view)) return false
+
+                              titleRef.current?.focus()
+                              titleRef.current?.setSelectionRange(
+                                 titleRef.current?.value.length,
+                                 titleRef.current?.value.length,
+                              )
+                              return true
+                           }
+
+                           return false
+                        },
+                     }}
+                     placeholder="Write details (markdown supported)"
+                  />
+               </EditorRoot>
             </div>
          </div>
       </div>
