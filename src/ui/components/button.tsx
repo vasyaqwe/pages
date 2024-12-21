@@ -9,13 +9,12 @@ const buttonVariants = cva(
    {
       variants: {
          variant: {
-            default: `bg-primary/90 shadow-sm border border-transparent focus-visible:ring-foreground text-primary-foreground
-                     hover:bg-primary`,
+            default: `bg-primary shadow-sm border border-transparent focus-visible:ring-foreground text-primary-foreground hover:bg-primary-hover`,
             secondary: `bg-secondary border border-transparent focus-visible:ring-foreground text-secondary-foreground hover:bg-secondary-hover`,
             "popover-item": `bg-transparent border border-transparent focus-visible:ring-foreground text-primary-foreground hover:bg-elevated-2`,
-            outline: `bg-background border border-transparent shadow-1 text-foreground data-[state=open]:border-border 
-                     disabled:border-transparent hover:border-border`,
-            ghost: "border border-transparent disabled:bg-transparent hover:bg-elevated-1",
+            destructive: `bg-elevated-3 border border-transparent text-foreground focus-visible:ring-foreground hover:text-destructive-foreground 
+            hover:bg-destructive`,
+            ghost: "border border-transparent hover:bg-elevated-3",
          },
          size: {
             default: "h-8 rounded-[10px] px-3 text-sm",

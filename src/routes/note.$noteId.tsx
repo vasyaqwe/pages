@@ -1,6 +1,6 @@
 import { useDebounceCallback } from "@/interactions/use-debounced-value"
 import { note as noteSchema } from "@/note/schema"
-import { buttonVariants } from "@/ui/components/button"
+import { Button, buttonVariants } from "@/ui/components/button"
 import { EditorContent, EditorRoot } from "@/ui/components/editor"
 import { placeholder, starterKit } from "@/ui/components/editor/extensions"
 import { link } from "@/ui/components/editor/link/extension"
@@ -96,16 +96,31 @@ function RouteComponent() {
    return (
       <div className="absolute inset-0 bg-elevated-1 p-2.5">
          <div className="h-full overflow-y-auto rounded-xl border border-border bg-background shadow-2xl">
-            <div className="p-3 pb-0 lg:p-4 lg:pb-0">
+            <div className="flex items-center justify-between p-3 pb-0 lg:p-4 lg:pb-0">
                <Link
                   to={"/"}
                   className={cn(
-                     buttonVariants({ variant: "secondary", size: "icon-sm" }),
-                     "cursor-default rounded-full",
+                     buttonVariants({
+                        variant: "ghost",
+                        size: "icon-sm",
+                     }),
                   )}
                >
                   <Icons.xMark className="size-4" />
                </Link>
+               <Button
+                  onClick={async () => {
+                     await db
+                        .delete(noteSchema)
+                        .where(eq(noteSchema.id, note.id))
+                     navigate({ to: "/" })
+                     router.invalidate()
+                  }}
+                  variant={"destructive"}
+                  size={"icon-sm"}
+               >
+                  <Icons.trash className="size-4" />
+               </Button>
             </div>
             <div className="container mt-4">
                <input
