@@ -76,9 +76,9 @@ function RouteComponent() {
 
                            await db.insert(note).values({ title, content })
 
+                           router.invalidate()
                            setDrawerOpen(false)
                            setContent("")
-                           router.invalidate()
                         }}
                         className="container flex flex-1 flex-col items-start py-10"
                      >
@@ -140,14 +140,14 @@ function RouteComponent() {
                </DrawerContent>
             </Drawer>
          </div>
-         <div className="mt-10 *:mt-5">
+         <div className="mt-10">
             {notes.length === 0
                ? null
                : notes.map((note) => (
                     <Link
                        to={"/note/$noteId"}
                        params={{ noteId: note.id }}
-                       className="relative isolate block w-full cursor-default before:absolute before:inset-[-8px_-10px_-8px_-10px] before:rounded-xl hover:before:bg-elevated-1"
+                       className="relative isolate mt-5 block w-full cursor-default before:absolute before:inset-[-8px_-10px_-8px_-10px] before:rounded-xl hover:before:bg-elevated-1"
                        key={note.id}
                     >
                        <div className="relative z-[1]">

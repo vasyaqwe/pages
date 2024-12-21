@@ -33,3 +33,8 @@ div.ProseMirror > p.is-editor-empty:first-child::before {
    font-weight: 500;
    color: var(--color-foreground);
 }
+
+.ProseMirror-hideselection *::selection {
+   background-color: transparent;
+   color: inherit;
+}

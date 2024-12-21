@@ -17,9 +17,10 @@ function RouteComponent() {
          <div className="flex min-h-[53px] items-center justify-between border-border border-t pt-5">
             <h1 className="text-foreground/80">SETTINGS</h1>
          </div>
-         <div className="mt-10 *:mt-5">
-            <h2 className="font-semibold text-xl">Export notes</h2>
+         <div className="mt-10">
+            <h2 className="mt-5 font-semibold text-xl">Export notes</h2>
             <Button
+               className="mt-5"
                variant={"secondary"}
                onClick={async () => {
                   const notes = await db.select().from(note)
@@ -39,9 +40,10 @@ function RouteComponent() {
                Download all notes
             </Button>
          </div>
-         <div className="mt-10 *:mt-5">
-            <h2 className="font-semibold text-xl">Import notes</h2>
+         <div className="mt-10">
+            <h2 className="mt-5 font-semibold text-xl">Import notes</h2>
             <Button
+               className="mt-5"
                onClick={() => fileRef.current?.click()}
                variant={"secondary"}
             >
