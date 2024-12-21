@@ -21,8 +21,6 @@ import { useHotkeys } from "react-hotkeys-hook"
 export const Route = createFileRoute("/")({
    component: RouteComponent,
    loader: async ({ context }) => {
-      // await context.db.execute(`DROP TABLE IF EXISTS "note";`)
-
       return {
          notes: await context.db
             .select()
@@ -77,12 +75,15 @@ function RouteComponent() {
                            ) as { title: string }
 
                            await db.insert(note).values({ title, content })
+
                            setDrawerOpen(false)
+                           setContent("")
                            router.invalidate()
                         }}
                         className="container flex flex-1 flex-col items-start py-10"
                      >
                         <input
+                           required
                            ref={titleRef}
                            autoFocus
                            className="h-10 w-full border-none bg-transparent font-bold text-2xl outline-hidden"

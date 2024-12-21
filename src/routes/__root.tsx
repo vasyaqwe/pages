@@ -14,6 +14,21 @@ export const Route = createRootRouteWithContext<{
    db: Database
 }>()({
    component: RootComponent,
+   beforeLoad: async ({ context }) => {
+      // await context.db.execute(`DROP TABLE IF EXISTS "note";`)
+      await context.db.execute(`
+CREATE TABLE IF NOT EXISTS "note" (
+	"id" text PRIMARY KEY NOT NULL,
+	"title" text NOT NULL,
+	"content" text DEFAULT '' NOT NULL,
+	"created_at" timestamp NOT NULL,
+	"updated_at" timestamp NOT NULL
+);
+`)
+      await context.db.execute(`
+CREATE INDEX IF NOT EXISTS "note_search_idx" ON "note" USING btree ("title","content");
+`)
+   },
 })
 
 function RootComponent() {

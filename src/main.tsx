@@ -1,7 +1,17 @@
 import "./ui/styles.css"
 import { db } from "@/db"
+import { Button, buttonVariants } from "@/ui/components/button"
 import { Icons } from "@/ui/components/icons"
-import { RouterProvider, createRouter } from "@tanstack/react-router"
+import {
+   ErrorComponent,
+   type ErrorComponentProps,
+   Link,
+   RouterProvider,
+   createRouter,
+   rootRouteId,
+   useMatch,
+   useRouter,
+} from "@tanstack/react-router"
 import { ThemeProvider } from "next-themes"
 import React from "react"
 import ReactDOM from "react-dom/client"
@@ -16,16 +26,68 @@ const router = createRouter({
    defaultPendingComponent: () => (
       <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 w-full">
          <Icons.feather className="mx-auto size-6 animate-fade-in opacity-0 drop-shadow-md [--animation-delay:100ms]" />
-         <h1 className="mt-5 animate-fade-in text-center font-medium text-foreground/80 opacity-0 duration-500 [--animation-delay:600ms]">
+         <h1 className="mt-5 animate-fade-in text-center font-medium text-foreground/80 opacity-0 duration-500 [--animation-delay:500ms]">
             Workspace is loading...
          </h1>
       </div>
    ),
-   // defaultNotFoundComponent: NotFoundComponent,
-   // defaultErrorComponent: ({ error }) => {
-   //    return <ErrorComponent error={error} />
-   // },
+   defaultNotFoundComponent: NotFound,
+   defaultErrorComponent: CatchBoundary,
 })
+
+function NotFound() {
+   return (
+      <div className="grid h-svh flex-1 place-items-center text-center">
+         <div>
+            <h1 className="mb-2 font-semibold text-xl">Not found</h1>
+            <p className="mb-5 text-lg leading-snug opacity-70">
+               This page does not exist — <br /> it may have been moved or
+               deleted.
+            </p>
+            <Link
+               to={"/"}
+               className={buttonVariants()}
+            >
+               Back home
+            </Link>
+         </div>
+      </div>
+   )
+}
+
+function CatchBoundary({ error }: ErrorComponentProps) {
+   const router = useRouter()
+   const _isRoot = useMatch({
+      strict: false,
+      select: (state) => state.id === rootRouteId,
+   })
+
+   return (
+      <div className="grid h-svh place-items-center text-center">
+         {import.meta.env.DEV && (
+            <div className="absolute top-0">
+               <ErrorComponent error={error} />
+            </div>
+         )}
+
+         <div>
+            <h1 className="mb-2 font-semibold text-xl">An error occurred</h1>
+            <p className="mb-5 text-lg leading-snug opacity-70">
+               Please, try again.
+            </p>
+            <div className="flex items-center justify-center gap-2.5">
+               <Button
+                  onClick={() => {
+                     router.invalidate()
+                  }}
+               >
+                  Try Again
+               </Button>
+            </div>
+         </div>
+      </div>
+   )
+}
 
 declare module "@tanstack/react-router" {
    interface Register {
