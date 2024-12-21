@@ -17,7 +17,7 @@ function RouteComponent() {
          <div className="flex min-h-[53px] items-center justify-between border-border border-t pt-5">
             <h1 className="text-foreground/80">SETTINGS</h1>
          </div>
-         <div className="mt-10 space-y-5">
+         <div className="mt-10 *:mt-5">
             <h2 className="font-semibold text-xl">Export notes</h2>
             <Button
                variant={"secondary"}
@@ -39,7 +39,7 @@ function RouteComponent() {
                Download all notes
             </Button>
          </div>
-         <div className="mt-10 space-y-5">
+         <div className="mt-10 *:mt-5">
             <h2 className="font-semibold text-xl">Import notes</h2>
             <Button
                onClick={() => fileRef.current?.click()}
