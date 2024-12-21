@@ -13,6 +13,7 @@ import type { EditorInstance } from "@/ui/components/editor/types"
 import { isOnFirstLine } from "@/ui/components/editor/utils"
 import { Icons } from "@/ui/components/icons"
 import { formatDateRelative } from "@/utils/format"
+import { wait } from "@/utils/misc"
 import { Link, createFileRoute, useRouter } from "@tanstack/react-router"
 import { desc } from "drizzle-orm"
 import * as React from "react"
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/")({
          notes: await context.db
             .select()
             .from(note)
-            .orderBy(desc(note.createdAt)),
+            .orderBy(desc(note.updatedAt)),
       }
    },
 })
@@ -50,7 +51,7 @@ function RouteComponent() {
       <div className="container py-8 md:py-12">
          <div className="flex items-center justify-between border-border border-t pt-5">
             <p className="text-foreground/80">
-               {notes.length === 0 ? "EMPTY" : `${notes.length} NOTES`}
+               {notes.length === 0 ? "EMPTY" : `${notes.length} PAGES`}
             </p>
             <Drawer
                open={drawerOpen}
@@ -76,9 +77,11 @@ function RouteComponent() {
 
                            await db.insert(note).values({ title, content })
 
-                           router.invalidate()
                            setDrawerOpen(false)
                            setContent("")
+
+                           await wait(200)
+                           router.invalidate()
                         }}
                         className="container flex flex-1 flex-col items-start py-10"
                      >
@@ -141,25 +144,29 @@ function RouteComponent() {
             </Drawer>
          </div>
          <div className="mt-10">
-            {notes.length === 0
-               ? null
-               : notes.map((note) => (
-                    <Link
-                       to={"/note/$noteId"}
-                       params={{ noteId: note.id }}
-                       className="relative isolate mt-5 block w-full cursor-default before:absolute before:inset-[-8px_-10px_-8px_-10px] before:rounded-xl hover:before:bg-elevated-1"
-                       key={note.id}
-                    >
-                       <div className="relative z-[1]">
-                          <p className="line-clamp-1 font-semibold text-lg leading-tight">
-                             {note.title}
-                          </p>
-                          <p className="mt-1.5 text-foreground/70 text-xs">
-                             {formatDateRelative(note.createdAt)}
-                          </p>
-                       </div>
-                    </Link>
-                 ))}
+            {notes.length === 0 ? (
+               <p className="mt-16 text-center text-foreground/70 text-lg">
+                  Write some pages.
+               </p>
+            ) : (
+               notes.map((note) => (
+                  <Link
+                     to={"/note/$noteId"}
+                     params={{ noteId: note.id }}
+                     className="relative isolate mt-6 block w-full cursor-default before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
+                     key={note.id}
+                  >
+                     <div className="relative z-[1]">
+                        <p className="line-clamp-1 font-semibold text-lg leading-tight">
+                           {note.title}
+                        </p>
+                        <p className="mt-1.5 text-foreground/65 text-xs">
+                           {formatDateRelative(note.updatedAt)}
+                        </p>
+                     </div>
+                  </Link>
+               ))
+            )}
          </div>
       </div>
    )

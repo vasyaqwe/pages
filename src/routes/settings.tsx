@@ -18,9 +18,13 @@ function RouteComponent() {
             <h1 className="text-foreground/80">SETTINGS</h1>
          </div>
          <div className="mt-10">
-            <h2 className="mt-5 font-semibold text-xl">Export notes</h2>
+            <h2 className="mt-5 font-semibold text-xl">Export/import notes</h2>
+            <p className="mt-3 mb-6 text-foreground/70 text-sm">
+               Do this to avoid data loss in case the browser's storage is
+               cleared.
+            </p>
             <Button
-               className="mt-5"
+               className="mr-3"
                variant={"secondary"}
                onClick={async () => {
                   const notes = await db.select().from(note)
@@ -37,18 +41,9 @@ function RouteComponent() {
                   URL.revokeObjectURL(url)
                }}
             >
-               Download all notes
+               DOWNLOAD
             </Button>
-         </div>
-         <div className="mt-10">
-            <h2 className="mt-5 font-semibold text-xl">Import notes</h2>
-            <Button
-               className="mt-5"
-               onClick={() => fileRef.current?.click()}
-               variant={"secondary"}
-            >
-               Upload a file
-            </Button>
+            <Button onClick={() => fileRef.current?.click()}>UPLOAD</Button>
             <input
                className="invisible"
                ref={fileRef}
@@ -82,6 +77,32 @@ function RouteComponent() {
                   }
                }}
             />
+         </div>
+         <div className="mt-10">
+            <h2 className="mt-5 font-semibold text-xl">About</h2>
+            <p className="mt-3 mb-6 text-foreground/70 text-sm">
+               Pages' data is stored in the browser's storage. <br /> Be cautios
+               when clearing it, and export notes above beforehand.
+            </p>
+            <p className="mt-3 mb-6 text-foreground/70 text-sm">
+               Pages is{" "}
+               <a
+                  href="https://github.com/vasyaqwe/pages"
+                  target="_blank"
+                  rel="noreferrer"
+               >
+                  <u> open source</u>
+               </a>
+               , created by{" "}
+               <a
+                  href="https://vasyldev.cc/s"
+                  target="_blank"
+                  rel="noreferrer"
+               >
+                  <u> vasyaqwe</u>
+               </a>
+               .
+            </p>
          </div>
       </div>
    )
