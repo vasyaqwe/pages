@@ -7,6 +7,9 @@
    --color-foreground: light-dark(#2a2c32, #f3f3f5);
    --color-primary: light-dark(#0a0a0b, #3c3c39);
    --color-primary-foreground: light-dark(#f3f3f5, #f3f3f5);
+   --color-secondary: light-dark(#f3f3f5, #e9e8ea);
+   --color-secondary-foreground: light-dark(#2a2c32, #171716);
+   --color-secondary-hover: light-dark(#e9e8ea, #ffffff);
    --color-popover: light-dark(#171716, #2f2f2d);
    --color-border: light-dark(#e9e8ea, #343432);
    --color-muted: light-dark(#c5c5c5, #7a7a7a);

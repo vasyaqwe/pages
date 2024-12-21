@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
 import { Route as IndexImport } from './routes/index'
 import { Route as NoteNoteIdImport } from './routes/note.$noteId'
 
 // Create/Update Routes
+
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -39,6 +46,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
     '/note/$noteId': {
       id: '/note/$noteId'
       path: '/note/$noteId'
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/note/$noteId': typeof NoteNoteIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/note/$noteId': typeof NoteNoteIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/note/$noteId': typeof NoteNoteIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/note/$noteId'
+  fullPaths: '/' | '/settings' | '/note/$noteId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/note/$noteId'
-  id: '__root__' | '/' | '/note/$noteId'
+  to: '/' | '/settings' | '/note/$noteId'
+  id: '__root__' | '/' | '/settings' | '/note/$noteId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SettingsRoute: typeof SettingsRoute
   NoteNoteIdRoute: typeof NoteNoteIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SettingsRoute: SettingsRoute,
   NoteNoteIdRoute: NoteNoteIdRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/settings",
         "/note/$noteId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.tsx"
     },
     "/note/$noteId": {
       "filePath": "note.$noteId.tsx"

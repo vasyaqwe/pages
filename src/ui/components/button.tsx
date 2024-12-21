@@ -11,7 +11,7 @@ const buttonVariants = cva(
          variant: {
             default: `bg-primary/90 shadow-sm border border-transparent focus-visible:ring-foreground text-primary-foreground
                      hover:bg-primary`,
-            secondary: `bg-border border border-transparent focus-visible:ring-foreground text-foreground hover:bg-muted/50`,
+            secondary: `bg-secondary border border-transparent focus-visible:ring-foreground text-secondary-foreground hover:bg-secondary-hover`,
             "popover-item": `bg-transparent border border-transparent focus-visible:ring-foreground text-primary-foreground hover:bg-elevated-2`,
             outline: `bg-background border border-transparent shadow-1 text-foreground data-[state=open]:border-border 
                      disabled:border-transparent hover:border-border`,
@@ -22,8 +22,8 @@ const buttonVariants = cva(
             sm: "h-8 rounded-lg px-2.5 text-sm",
             lg: "h-10 gap-2 rounded-xl px-4 text-base",
             xl: "h-11 gap-3 rounded-xl px-4 text-base",
-            icon: "size-9 gap-0 rounded-lg",
-            "icon-sm": "size-8 gap-0 rounded-lg",
+            icon: "size-9 gap-0 rounded-full",
+            "icon-sm": "size-8 gap-0 rounded-full",
          },
       },
       defaultVariants: {

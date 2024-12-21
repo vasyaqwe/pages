@@ -1,10 +1,14 @@
 import type { Database } from "@/db"
 import { useSound } from "@/interactions/use-sound"
 import { Button } from "@/ui/components/button"
+import { Icons } from "@/ui/components/icons"
 import {
    Outlet,
    createRootRouteWithContext,
+   useLocation,
    useMatches,
+   useNavigate,
+   useRouter,
 } from "@tanstack/react-router"
 import { useTheme } from "next-themes"
 import { type ReactNode, useEffect } from "react"
@@ -32,7 +36,10 @@ CREATE INDEX IF NOT EXISTS "note_search_idx" ON "note" USING btree ("title","con
 })
 
 function RootComponent() {
+   const { pathname } = useLocation()
    const { resolvedTheme, setTheme } = useTheme()
+   const router = useRouter()
+   const navigate = useNavigate()
 
    useEffect(() => {
       if (resolvedTheme === "dark") {
@@ -64,17 +71,43 @@ function RootComponent() {
             <Outlet />
             <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center rounded-full bg-popover p-1 text-popover-foreground shadow-lg">
                <Button
+                  variant={"popover-item"}
+                  size={"icon"}
+                  onClick={() => {
+                     if (pathname === "/settings") return router.history.back()
+
+                     return navigate({ to: "/settings" })
+                  }}
+               >
+                  {pathname === "/settings" ? (
+                     <Icons.arrowLeft className="size-[20px]" />
+                  ) : (
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-[19px]"
+                        viewBox="0 0 20 20"
+                     >
+                        <g fill="currentColor">
+                           <path
+                              d="m17.447,8.605l-.673-.336c-.167-.653-.425-1.268-.761-1.834l.238-.715c.12-.359.026-.756-.242-1.023l-.707-.707c-.268-.269-.665-.363-1.023-.242l-.715.238c-.565-.336-1.181-.594-1.834-.761l-.336-.673c-.169-.339-.516-.553-.895-.553h-1c-.379,0-.725.214-.895.553l-.336.673c-.653.167-1.268.425-1.834.761l-.715-.238c-.359-.121-.755-.026-1.023.242l-.707.707c-.268.268-.361.664-.242,1.023l.238.715c-.336.565-.594,1.181-.761,1.834l-.673.336c-.339.169-.553.516-.553.895v1c0,.379.214.725.553.895l.673.336c.167.653.425,1.268.761,1.834l-.238.715c-.12.359-.026.756.242,1.023l.707.707c.19.191.446.293.707.293.106,0,.212-.017.316-.051l.715-.238c.565.336,1.181.594,1.834.761l.336.673c.169.339.516.553.895.553h1c.379,0,.725-.214.895-.553l.336-.673c.653-.167,1.268-.425,1.834-.761l.715.238c.104.035.21.051.316.051.261,0,.517-.103.707-.293l.707-.707c.268-.268.361-.664.242-1.023l-.238-.715c.336-.565.594-1.181.761-1.834l.673-.336c.339-.169.553-.516.553-.895v-1c0-.379-.214-.725-.553-.895Zm-7.447,6.395c-2.761,0-5-2.239-5-5s2.239-5,5-5,5,2.239,5,5-2.239,5-5,5Z"
+                              strokeWidth="0"
+                              fill="currentColor"
+                           />
+                        </g>
+                     </svg>
+                  )}
+               </Button>
+               <Button
                   onClick={() => {
                      setTheme(resolvedTheme === "light" ? "dark" : "light")
                      sound.play()
                   }}
                   size={"icon"}
                   variant={"popover-item"}
-                  className={"rounded-full"}
                >
                   {resolvedTheme === "light" ? (
                      <svg
-                        className="size-4"
+                        className="size-[18px]"
                         viewBox="0 0 14 14"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +151,7 @@ function RootComponent() {
                      </svg>
                   ) : (
                      <svg
-                        className="size-4"
+                        className="size-[18px]"
                         viewBox="0 0 14 14"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
