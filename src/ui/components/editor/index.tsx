@@ -59,6 +59,7 @@ export const EditorContent = React.forwardRef<
       return (
          <div
             ref={ref}
+            spellCheck={false}
             className={cn("w-full", className)}
          >
             {editor === null ? (

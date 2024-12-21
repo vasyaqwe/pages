@@ -8,6 +8,7 @@ import type { EditorInstance } from "@/ui/components/editor/types"
 import { isOnFirstLine } from "@/ui/components/editor/utils"
 import { Icons } from "@/ui/components/icons"
 import { cn } from "@/ui/utils"
+import { wait } from "@/utils/misc"
 import {
    Link,
    createFileRoute,
@@ -77,17 +78,21 @@ function RouteComponent() {
    useBlocker({
       enableBeforeUnload: false,
       shouldBlockFn: async () => {
-         await db
-            .update(noteSchema)
-            .set({ title: titleRef.current?.value })
-            .where(eq(noteSchema.id, note.id))
+         if (titleRef.current?.value !== note.title) {
+            await db
+               .update(noteSchema)
+               .set({ title: titleRef.current?.value })
+               .where(eq(noteSchema.id, note.id))
+            router.invalidate()
+         }
 
-         await db
-            .update(noteSchema)
-            .set({ content })
-            .where(eq(noteSchema.id, note.id))
-
-         router.invalidate()
+         if (content !== note.content) {
+            await db
+               .update(noteSchema)
+               .set({ content })
+               .where(eq(noteSchema.id, note.id))
+            router.invalidate()
+         }
 
          return false
       },
@@ -110,10 +115,11 @@ function RouteComponent() {
                </Link>
                <Button
                   onClick={async () => {
+                     navigate({ to: "/" })
+                     await wait(200)
                      await db
                         .delete(noteSchema)
                         .where(eq(noteSchema.id, note.id))
-                     navigate({ to: "/" })
                      router.invalidate()
                   }}
                   variant={"destructive"}

@@ -16,3 +16,6 @@ export const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
 
    return store
 }
+
+export const wait = (ms: number) =>
+   new Promise((resolve) => setTimeout(resolve, ms))
