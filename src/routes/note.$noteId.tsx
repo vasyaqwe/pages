@@ -1,3 +1,4 @@
+import whoosh from "@/assets/sound/whoosh_2.wav"
 import { useDebounceCallback } from "@/interactions/use-debounced-value"
 import { note as noteSchema } from "@/note/schema"
 import { Button, buttonVariants } from "@/ui/components/button"
@@ -20,6 +21,7 @@ import {
 import { eq } from "drizzle-orm"
 import * as React from "react"
 import { useHotkeys } from "react-hotkeys-hook"
+import useSound from "use-sound"
 
 export const Route = createFileRoute("/note/$noteId")({
    component: RouteComponent,
@@ -98,6 +100,8 @@ function RouteComponent() {
       },
    })
 
+   const [play] = useSound(whoosh)
+
    return (
       <div className="absolute inset-0 bg-elevated-1 p-2.5">
          <div className="h-full overflow-y-auto rounded-xl border border-border bg-background shadow-2xl">
@@ -121,6 +125,8 @@ function RouteComponent() {
                         .delete(noteSchema)
                         .where(eq(noteSchema.id, note.id))
                      router.invalidate()
+                     await wait(100)
+                     play()
                   }}
                   variant={"destructive"}
                   size={"icon-sm"}

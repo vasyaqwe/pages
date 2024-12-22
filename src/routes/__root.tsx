@@ -1,5 +1,5 @@
+import tap from "@/assets/sound/tap.wav"
 import type { Database } from "@/db"
-import { useSound } from "@/interactions/use-sound"
 import { Button } from "@/ui/components/button"
 import { Icons } from "@/ui/components/icons"
 import {
@@ -13,6 +13,7 @@ import {
 import { useTheme } from "next-themes"
 import { type ReactNode, useEffect } from "react"
 import { useHotkeys } from "react-hotkeys-hook"
+import { useSound } from "use-sound"
 
 export const Route = createRootRouteWithContext<{
    db: Database
@@ -53,14 +54,14 @@ function RootComponent() {
       }
    }, [resolvedTheme])
 
-   const sound = useSound("/sound/tap.wav")
+   const [play] = useSound(tap)
 
    useHotkeys(
       "t",
       (e) => {
          e.preventDefault()
          setTheme(resolvedTheme === "light" ? "dark" : "light")
-         sound.play()
+         play()
       },
       [resolvedTheme],
    )
@@ -100,7 +101,7 @@ function RootComponent() {
                <Button
                   onClick={() => {
                      setTheme(resolvedTheme === "light" ? "dark" : "light")
-                     sound.play()
+                     play()
                   }}
                   size={"icon"}
                   variant={"popover-item"}
