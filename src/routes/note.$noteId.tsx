@@ -65,6 +65,7 @@ function RouteComponent() {
          .set({ title })
          .where(eq(noteSchema.id, note.id))
 
+      router.preloadRoute({ to: "/" })
       router.invalidate()
    }, 700)
 
@@ -74,6 +75,7 @@ function RouteComponent() {
          .set({ content })
          .where(eq(noteSchema.id, note.id))
 
+      router.preloadRoute({ to: "/" })
       router.invalidate()
    }, 700)
 
@@ -86,6 +88,7 @@ function RouteComponent() {
                .set({ title: titleRef.current?.value })
                .where(eq(noteSchema.id, note.id))
             router.invalidate()
+            await router.preloadRoute({ to: "/" })
          }
 
          if (content !== note.content) {
@@ -94,6 +97,7 @@ function RouteComponent() {
                .set({ content })
                .where(eq(noteSchema.id, note.id))
             router.invalidate()
+            await router.preloadRoute({ to: "/" })
          }
 
          return false
@@ -104,7 +108,7 @@ function RouteComponent() {
 
    return (
       <div className="absolute inset-0 bg-elevated-1 p-2.5">
-         <div className="h-full overflow-y-auto rounded-xl border border-border bg-background shadow-2xl">
+         <div className="h-full overflow-y-auto rounded-2xl border border-border bg-background shadow-2xl">
             <div className="flex items-center justify-between p-3 pb-0 lg:p-4 lg:pb-0">
                <Link
                   to={"/"}

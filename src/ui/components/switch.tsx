@@ -1,4 +1,5 @@
 import switch_sound from "@/assets/sound/switch.wav"
+import { focusStyles } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { Switch as SwitchPrimitive } from "@base-ui-components/react/switch"
 import useSound from "use-sound"
@@ -19,6 +20,7 @@ function Switch({
          }}
          className={cn(
             "inline-flex h-[23px] w-[38px] cursor-(--cursor) items-center rounded-full bg-muted shadow-xs data-checked:bg-primary data-checked:hover:bg-primary-hover hover:bg-muted-hover",
+            focusStyles,
             className,
          )}
          {...props}

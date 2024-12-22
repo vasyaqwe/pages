@@ -117,6 +117,7 @@ function RouteComponent() {
                         href="https://andyworksco.notion.site/Boring-Sound-Kit-d92a136378114eceb1898313acb673f0"
                         target="_blank"
                         rel="noreferrer"
+                        className="hover:text-foreground"
                      >
                         <u>!Boring Sound Kit</u>{" "}
                      </a>
@@ -128,6 +129,7 @@ function RouteComponent() {
                         href="https://github.com/vasyaqwe/pages"
                         target="_blank"
                         rel="noreferrer"
+                        className="hover:text-foreground"
                      >
                         <u>open source</u>
                      </a>
@@ -136,6 +138,7 @@ function RouteComponent() {
                         href="https://vasyldev.cc/s"
                         target="_blank"
                         rel="noreferrer"
+                        className="hover:text-foreground"
                      >
                         <u>vasyaqwe</u>
                      </a>
