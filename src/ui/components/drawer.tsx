@@ -38,7 +38,7 @@ function DrawerContent({
                }
             }}
             className={cn(
-               "group fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[88svh] flex-col rounded-t-xl border border-border bg-background md:max-h-[95svh]",
+               "group fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[88svh] flex-col rounded-t-xl border border-border bg-background md:max-h-[94svh]",
                "shadow-[0_-8px_10px_0px_hsl(var(--foreground)/.06)] [&[data-vaul-drawer-direction=right]]:right-0 [&[data-vaul-drawer-direction=right]]:left-auto",
                "[&[data-vaul-drawer-direction=right]]:mt-0 [&[data-vaul-drawer-direction=right]]:h-screen [&[data-vaul-drawer-direction=right]]:max-h-full",
                "[&[data-vaul-drawer-direction=right]]:top-2 [&[data-vaul-drawer-direction=right]]:right-2 [&[data-vaul-drawer-direction=right]]:h-auto",

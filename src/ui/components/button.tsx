@@ -11,7 +11,7 @@ const buttonVariants = cva(
          variant: {
             default: `bg-primary shadow-sm border border-transparent text-primary-foreground hover:bg-primary-hover`,
             secondary: `bg-secondary border border-transparent text-secondary-foreground hover:bg-secondary-hover`,
-            "popover-item": `bg-transparent border border-transparent text-primary-foreground hover:bg-popover-hover`,
+            "popover-item": `bg-transparent border border-transparent text-primary-foreground hover:bg-popover-hover aria-[current=page]:bg-popover-hover`,
             destructive: `bg-elevated-2 border border-transparent text-foreground hover:text-destructive-foreground 
             hover:bg-destructive`,
             ghost: "border border-transparent hover:bg-elevated-2",
