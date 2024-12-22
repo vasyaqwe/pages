@@ -108,8 +108,19 @@ function RouteComponent() {
                   <h2 className="mt-5 font-semibold text-xl">About</h2>
                   <p className="mt-3 mb-6 text-foreground/70 text-sm">
                      Pages' data is stored in the browser's storage. <br /> Be
-                     cautios when clearing it, and export notes above
-                     beforehand.
+                     cautios when clearing it, and export pages beforehand with
+                     the button above.
+                  </p>
+                  <p className="mt-3 mb-6 text-foreground/70 text-sm">
+                     Credits to the{" "}
+                     <a
+                        href="https://andyworksco.notion.site/Boring-Sound-Kit-d92a136378114eceb1898313acb673f0"
+                        target="_blank"
+                        rel="noreferrer"
+                     >
+                        <u>!Boring Sound Kit</u>{" "}
+                     </a>
+                     for all the sound feedback on interactions.
                   </p>
                   <p className="mt-3 mb-6 text-foreground/70 text-sm">
                      Pages is{" "}
@@ -118,7 +129,7 @@ function RouteComponent() {
                         target="_blank"
                         rel="noreferrer"
                      >
-                        <u> open source</u>
+                        <u>open source</u>
                      </a>
                      , created by{" "}
                      <a
@@ -126,7 +137,7 @@ function RouteComponent() {
                         target="_blank"
                         rel="noreferrer"
                      >
-                        <u> vasyaqwe</u>
+                        <u>vasyaqwe</u>
                      </a>
                      .
                   </p>

@@ -22,6 +22,7 @@
    --color-elevated-3: light-dark(#f3f3f5, #464644);
 
    --text-xs: 0.8rem;
+   --text-sm--line-height: 1.4rem;
    --text-base: 0.925rem;
    --text-lg: 0.95rem;
    --text-xl: 1.07rem;
