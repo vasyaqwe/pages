@@ -2,17 +2,9 @@ import { cn } from "@/ui/utils"
 import type * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
-const Drawer = ({
-   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => {
-   return <DrawerPrimitive.Root {...props} />
-}
-Drawer.displayName = "Drawer"
-
+const Drawer = DrawerPrimitive.Root
 const DrawerTrigger = DrawerPrimitive.Trigger
-
 const DrawerPortal = DrawerPrimitive.Portal
-
 const DrawerClose = DrawerPrimitive.Close
 
 function DrawerOverlay({

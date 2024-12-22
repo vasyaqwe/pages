@@ -1,18 +1,18 @@
+import { focusStyles } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
 import type * as React from "react"
 
 const buttonVariants = cva(
-   `relative inline-flex cursor-default items-center justify-center font-medium gap-1.5 leading-none overflow-hidden whitespace-nowrap 
-   focus-visible:ring-1 focus-visible:ring-offset-[1px] focus-visible:ring-foreground/80 focus-visible:outline-foreground/30 outline 
-   outline-3 outline-transparent outline-offset-2 disabled:opacity-70 disabled:cursor-not-allowed`,
+   `relative inline-flex cursor-(--cursor) items-center justify-center font-medium gap-1.5 leading-none overflow-hidden whitespace-nowrap 
+    disabled:opacity-70 disabled:cursor-not-allowed`,
    {
       variants: {
          variant: {
-            default: `bg-primary shadow-sm border border-transparent focus-visible:ring-foreground text-primary-foreground hover:bg-primary-hover`,
-            secondary: `bg-secondary border border-transparent focus-visible:ring-foreground text-secondary-foreground hover:bg-secondary-hover`,
-            "popover-item": `bg-transparent border border-transparent focus-visible:ring-foreground text-primary-foreground hover:bg-elevated-2`,
-            destructive: `bg-elevated-3 border border-transparent text-foreground focus-visible:ring-foreground hover:text-destructive-foreground 
+            default: `bg-primary shadow-sm border border-transparent text-primary-foreground hover:bg-primary-hover`,
+            secondary: `bg-secondary border border-transparent text-secondary-foreground hover:bg-secondary-hover`,
+            "popover-item": `bg-transparent border border-transparent text-primary-foreground hover:bg-elevated-2`,
+            destructive: `bg-elevated-3 border border-transparent text-foreground hover:text-destructive-foreground 
             hover:bg-destructive`,
             ghost: "border border-transparent hover:bg-elevated-3",
          },
@@ -25,6 +25,11 @@ const buttonVariants = cva(
             "icon-sm": "size-8 gap-0 rounded-full",
          },
       },
+      compoundVariants: [
+         {
+            className: focusStyles,
+         },
+      ],
       defaultVariants: {
          variant: "default",
          size: "default",

@@ -16,6 +16,7 @@
    --color-destructive-foreground: light-dark(#e74b4e, #e95e60);
    --color-border: light-dark(#e9e8ea, #343432);
    --color-muted: light-dark(#c5c5c5, #7a7a7a);
+   --color-muted-hover: light-dark(#d4d4d4, #8c8c8c);
    --color-elevated-1: light-dark(#f6f6f7, #232321);
    --color-elevated-2: light-dark(#4b4b4a, #464644);
    --color-elevated-3: light-dark(#f3f3f5, #464644);
@@ -31,6 +32,7 @@
    --font-primary: "jet_brains_mono", monospace;
 
    --ease-vaul: cubic-bezier(0.32, 0.72, 0, 1);
+   --cursor: default;
 
    --animation-duration: 500ms;
    --animation-delay: 0ms;

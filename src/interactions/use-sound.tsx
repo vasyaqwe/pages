@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import * as React from "react"
 
 export function useSound(
    url: string,
@@ -9,15 +9,15 @@ export function useSound(
         }
       | undefined = {},
 ) {
-   const audioRef = useRef<HTMLAudioElement | null>(null)
+   const audioRef = React.useRef<HTMLAudioElement | null>(null)
 
-   useEffect(() => {
+   React.useEffect(() => {
       // If the url changes, we clear the old instance,
       // this way a new Audio instance will be created on the next play
       audioRef.current = null
    }, [url])
 
-   useEffect(() => {
+   React.useEffect(() => {
       if (!audioRef.current) return
       audioRef.current.volume = settings.volume || 1
       audioRef.current.playbackRate = settings.playbackRate || 1

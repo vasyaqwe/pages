@@ -153,7 +153,7 @@ function RouteComponent() {
                   <Link
                      to={"/note/$noteId"}
                      params={{ noteId: note.id }}
-                     className="relative isolate mt-6 block w-full cursor-default before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
+                     className="relative isolate mt-6 block w-full cursor-(--cursor) before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
                      key={note.id}
                   >
                      <div className="relative z-[1]">
