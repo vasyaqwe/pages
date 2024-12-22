@@ -95,15 +95,25 @@ declare module "@tanstack/react-router" {
    }
 }
 
-// biome-ignore lint/style/noNonNullAssertion: ...
-ReactDOM.createRoot(document.getElementById("app")!).render(
-   <React.StrictMode>
-      <ThemeProvider
-         defaultTheme="light"
-         attribute="class"
-         disableTransitionOnChange
-      >
-         <RouterProvider router={router} />
-      </ThemeProvider>
-   </React.StrictMode>,
-)
+if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+   // biome-ignore lint/style/noNonNullAssertion: ...
+   ReactDOM.createRoot(document.getElementById("app")!).render(
+      <div className="p-5">
+         <h1>Safari is currently not supported</h1>
+         <p>Please try in Chrome, Firefox or other modern browsers</p>
+      </div>,
+   )
+} else {
+   // biome-ignore lint/style/noNonNullAssertion: ...
+   ReactDOM.createRoot(document.getElementById("app")!).render(
+      <React.StrictMode>
+         <ThemeProvider
+            defaultTheme="light"
+            attribute="class"
+            disableTransitionOnChange
+         >
+            <RouterProvider router={router} />
+         </ThemeProvider>
+      </React.StrictMode>,
+   )
+}
