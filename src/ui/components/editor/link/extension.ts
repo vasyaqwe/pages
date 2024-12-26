@@ -3,7 +3,7 @@ import linkExtension from "@tiptap/extension-link"
 
 const link = linkExtension.configure({
    HTMLAttributes: {
-      class: cn("cursor-pointer underline"),
+      class: cn("cursor-pointer text-foreground underline"),
    },
 })
 
