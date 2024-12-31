@@ -1,5 +1,6 @@
 import tap from "@/assets/sound/tap.wav"
 import type { Database } from "@/db"
+import { useLocalStorage } from "@/interactions/use-local-storage"
 import { ModalProvider, pushModal } from "@/modals"
 import { Button, buttonVariants } from "@/ui/components/button"
 import {
@@ -9,7 +10,7 @@ import {
    useMatches,
 } from "@tanstack/react-router"
 import { useTheme } from "next-themes"
-import { type ReactNode, useEffect } from "react"
+import * as React from "react"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useSound } from "use-sound"
 
@@ -35,9 +36,13 @@ CREATE INDEX IF NOT EXISTS "note_search_idx" ON "note" USING btree ("title","con
 })
 
 function RootComponent() {
-   const { resolvedTheme, setTheme } = useTheme()
+   const [cursor] = useLocalStorage("cursor", "default")
+   React.useEffect(() => {
+      document.documentElement.style.setProperty("--cursor", cursor)
+   }, [])
 
-   useEffect(() => {
+   const { resolvedTheme, setTheme } = useTheme()
+   React.useEffect(() => {
       if (resolvedTheme === "dark") {
          document
             .querySelector('meta[name="theme-color"]')
@@ -191,11 +196,11 @@ function RootComponent() {
    )
 }
 
-function Meta({ children }: { children: ReactNode }) {
+function Meta({ children }: { children: React.ReactNode }) {
    const matches = useMatches()
    const meta = matches.at(-1)?.meta?.find((meta) => meta?.title)
 
-   useEffect(() => {
+   React.useEffect(() => {
       document.title = [meta?.title ?? "Pages"].filter(Boolean).join(" · ")
    }, [meta])
 

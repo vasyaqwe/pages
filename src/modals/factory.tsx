@@ -1,8 +1,7 @@
 // https://github.com/lindesvard/pushmodal
 import * as Dialog from "@radix-ui/react-dialog"
 import mitt, { type Handler } from "mitt"
-import type React from "react"
-import { type ComponentType, Suspense, useEffect, useState } from "react"
+import * as React from "react"
 
 type CreatePushModalOptions<T> = {
    modals: {
@@ -16,7 +15,7 @@ type CreatePushModalOptions<T> = {
               }>
               Component: React.ComponentType<T[key]>
            }
-         | ComponentType<T[key]>
+         | React.ComponentType<T[key]>
    }
 }
 
@@ -56,11 +55,11 @@ export function createPushModal<T>({ modals }: CreatePushModalOptions<T>) {
    const emitter = mitt<EventHandlers>()
 
    function ModalProvider() {
-      const [state, setState] = useState<StateItem[]>([])
+      const [state, setState] = React.useState<StateItem[]>([])
 
       // Run this to ensure we remove closed modals from the state
-      // Otherwise the unmount in useEffect will not be triggered until the next modal is opened
-      useEffect(() => {
+      // Otherwise the unmount in React.useEffect will not be triggered until the next modal is opened
+      React.useEffect(() => {
          const hasClosedModals = state.some(
             (item) => typeof item.closedAt === "number",
          )
@@ -79,7 +78,7 @@ export function createPushModal<T>({ modals }: CreatePushModalOptions<T>) {
          }
       }, [state])
 
-      useEffect(() => {
+      React.useEffect(() => {
          const pushHandler: Handler<EventHandlers["push"]> = ({
             name,
             props,
@@ -212,10 +211,10 @@ export function createPushModal<T>({ modals }: CreatePushModalOptions<T>) {
                         }
                      }}
                   >
-                     <Suspense>
+                     <React.Suspense>
                         {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
                         <Component {...(item.props as any)} />
-                     </Suspense>
+                     </React.Suspense>
                   </Root>
                )
             })}
@@ -321,7 +320,7 @@ export function createPushModal<T>({ modals }: CreatePushModalOptions<T>) {
          name: T | "*",
          callback: EventCallback<T>,
       ) => {
-         useEffect(() => {
+         React.useEffect(() => {
             return onPushModal(name, callback)
          }, [name, callback])
       },
