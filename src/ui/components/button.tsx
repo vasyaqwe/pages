@@ -1,7 +1,6 @@
 import { focusStyles } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
-import type * as React from "react"
 
 const buttonVariants = cva(
    `relative inline-flex cursor-(--cursor) items-center justify-center font-medium gap-1.5 leading-none overflow-hidden whitespace-nowrap 

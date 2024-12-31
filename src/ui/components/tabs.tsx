@@ -1,7 +1,6 @@
 import { focusStyles } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { Tabs as TabsPrimitive } from "@base-ui-components/react/tabs"
-import type * as React from "react"
 
 const Tabs = TabsPrimitive.Root
 
