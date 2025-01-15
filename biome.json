@@ -10,12 +10,7 @@
       "attributePosition": "multiline"
    },
    "files": {
-      "ignore": [
-         ".vinxi",
-         "routeTree.gen.ts",
-         "migrations/meta",
-         "toast/styles.css"
-      ]
+      "ignore": ["dist", "routeTree.gen.ts", "package.json"]
    },
    "css": {
       "formatter": {

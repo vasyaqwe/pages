@@ -1,4 +1,5 @@
 import { createTable, lifecycleDates, tableId } from "@/db/utils"
+import type { InferSelectModel } from "drizzle-orm"
 import { index, text } from "drizzle-orm/pg-core"
 
 export const note = createTable(
@@ -11,3 +12,5 @@ export const note = createTable(
    },
    (table) => [index("note_search_idx").on(table.title, table.content)],
 )
+
+export type Note = InferSelectModel<typeof note>

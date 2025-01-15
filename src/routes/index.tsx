@@ -1,5 +1,5 @@
 import { pushModal } from "@/modals"
-import { note } from "@/note/schema"
+import { type Note, note } from "@/note/schema"
 import { Button } from "@/ui/components/button"
 import { Icons } from "@/ui/components/icons"
 import { formatDateRelative } from "@/utils/format"
@@ -40,24 +40,33 @@ function RouteComponent() {
                </p>
             ) : (
                notes.map((note) => (
-                  <Link
-                     to={"/note/$noteId"}
-                     params={{ noteId: note.id }}
-                     className="relative isolate mt-6 block w-full cursor-(--cursor) before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
+                  <NoteItem
                      key={note.id}
-                  >
-                     <div className="relative z-[1]">
-                        <p className="line-clamp-1 break-all font-semibold text-lg leading-tight">
-                           {note.title}
-                        </p>
-                        <p className="mt-1.5 text-foreground/65 text-xs">
-                           {formatDateRelative(note.createdAt)}
-                        </p>
-                     </div>
-                  </Link>
+                     note={note}
+                  />
                ))
             )}
          </div>
       </div>
+   )
+}
+
+function NoteItem({ note }: { note: Note }) {
+   return (
+      <Link
+         to={"/note/$noteId"}
+         params={{ noteId: note.id }}
+         className="relative isolate mt-6 block w-full cursor-(--cursor) before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
+         key={note.id}
+      >
+         <div className="relative z-[1]">
+            <p className="line-clamp-1 break-all font-semibold text-lg leading-tight">
+               {note.title}
+            </p>
+            <p className="mt-1.5 text-foreground/65 text-xs">
+               {formatDateRelative(note.createdAt)}
+            </p>
+         </div>
+      </Link>
    )
 }
