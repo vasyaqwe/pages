@@ -135,7 +135,7 @@ function RouteComponent() {
                      </a>
                      , created by{" "}
                      <a
-                        href="https://vasyldev.cc/s"
+                        href="https://vasyaqwe.com"
                         target="_blank"
                         rel="noreferrer"
                         className="hover:text-foreground"
