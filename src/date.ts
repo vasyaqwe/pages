@@ -79,31 +79,3 @@ export const formatDate = (input: number) => {
 
    return formatDateIntl(input)
 }
-
-export const formatNumber = (value: number) => {
-   const formatter = new Intl.NumberFormat("en-US", {
-      maximumFractionDigits: 1,
-   })
-
-   if (value >= 1_000_000) {
-      return `${formatter.format(value / 1_000_000)}M`
-   }
-   if (value >= 1_000) {
-      return `${formatter.format(value / 1_000)}K`
-   }
-   return formatter.format(value)
-}
-
-export const formatCurrency = (
-   price: number | string,
-   options: Intl.NumberFormatOptions = {},
-) => {
-   return new Intl.NumberFormat("ua-UA", {
-      style: "currency",
-      currency: options.currency ?? "UAH",
-      notation: options.notation ?? "standard",
-      ...options,
-   })
-      .format(Number(price))
-      .replace("UAH", "₴")
-}

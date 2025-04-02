@@ -1,4 +1,4 @@
-import { focusStyles } from "@/ui/constants"
+import { FOCUS_STYLES } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { Tabs as TabsPrimitive } from "@base-ui-components/react/tabs"
 
@@ -25,7 +25,7 @@ function TabsTab({
          className={cn(
             "inline-flex h-8 cursor-(--cursor) items-center justify-center rounded-full px-2.5 aria-selected:bg-primary aria-selected:text-primary-foreground",
             "text-foreground/75 disabled:cursor-not-allowed hover:text-foreground disabled:opacity-70 aria-selected:shadow-xs",
-            focusStyles,
+            FOCUS_STYLES,
             className,
          )}
          {...props}

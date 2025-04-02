@@ -1,4 +1,4 @@
-import { focusStyles } from "@/ui/constants"
+import { FOCUS_STYLES } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
 
@@ -26,7 +26,7 @@ const buttonVariants = cva(
       },
       compoundVariants: [
          {
-            className: focusStyles,
+            className: FOCUS_STYLES,
          },
       ],
       defaultVariants: {

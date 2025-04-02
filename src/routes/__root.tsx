@@ -1,7 +1,6 @@
 import tap from "@/assets/sound/tap.wav"
-import type { Database } from "@/db"
+import type { DatabaseClient } from "@/database"
 import { useLocalStorage } from "@/interactions/use-local-storage"
-import { ModalProvider, pushModal } from "@/modals"
 import { Button, buttonVariants } from "@/ui/components/button"
 import {
    Link,
@@ -15,7 +14,7 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { useSound } from "use-sound"
 
 export const Route = createRootRouteWithContext<{
-   db: Database
+   db: DatabaseClient
 }>()({
    component: RootComponent,
    beforeLoad: async ({ context }) => {
@@ -66,14 +65,8 @@ function RootComponent() {
       [resolvedTheme],
    )
 
-   useHotkeys("w", (e) => {
-      e.preventDefault()
-      pushModal("create_note")
-   })
-
    return (
       <Meta>
-         <ModalProvider />
          <main>
             <Outlet />
             <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center gap-0.5 rounded-full bg-popover p-1 text-popover-foreground shadow-lg">

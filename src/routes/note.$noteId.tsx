@@ -8,8 +8,7 @@ import { link } from "@/ui/components/editor/link/extension"
 import type { EditorInstance } from "@/ui/components/editor/types"
 import { isOnFirstLine } from "@/ui/components/editor/utils"
 import { Icons } from "@/ui/components/icons"
-import { cn } from "@/ui/utils"
-import { wait } from "@/utils/misc"
+import { cn, wait } from "@/ui/utils"
 import {
    Link,
    createFileRoute,

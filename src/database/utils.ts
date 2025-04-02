@@ -41,7 +41,7 @@ const tableId = (prefix: keyof typeof prefixes) =>
 
 const createTable = pgTable
 
-const lifecycleDates = {
+const timestamps = {
    createdAt: timestamp()
       .$defaultFn(() => new Date())
       .notNull(),
@@ -51,4 +51,4 @@ const lifecycleDates = {
       .$onUpdateFn(() => new Date()),
 }
 
-export { createTable, lifecycleDates, generateId, tableId }
+export { createTable, timestamps, generateId, tableId }

@@ -5,6 +5,6 @@ import * as schema from "./schema"
 
 export const client = new PGlite(env.DATABASE_URL)
 
-export const db = drizzle({ client, casing: "snake_case", schema })
+export const databaseClient = drizzle({ client, casing: "snake_case", schema })
 
-export type Database = typeof db
+export type DatabaseClient = typeof databaseClient

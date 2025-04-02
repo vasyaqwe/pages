@@ -1,5 +1,4 @@
 import { useCssVariable } from "@/interactions/use-css-variable"
-import { logger } from "@/lib/logger"
 import { note } from "@/note/schema"
 import { Button } from "@/ui/components/button"
 import { Switch } from "@/ui/components/switch"
@@ -98,7 +97,7 @@ function RouteComponent() {
                               .values(notes)
                               .then(() => alert("Imported successfully"))
                         } catch (error) {
-                           logger.error(error)
+                           console.error(error)
                            alert("Error importing notes")
                         }
                      }}

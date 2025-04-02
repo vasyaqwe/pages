@@ -1,5 +1,5 @@
 import "./ui/styles.css"
-import { db } from "@/db"
+import { databaseClient } from "@/database"
 import { Button, buttonVariants } from "@/ui/components/button"
 import { Icons } from "@/ui/components/icons"
 import {
@@ -20,7 +20,7 @@ import { routeTree } from "./routeTree.gen"
 const router = createRouter({
    routeTree,
    context: {
-      db,
+      db: databaseClient,
    },
    defaultPreload: "render",
    defaultPendingComponent: () => (
