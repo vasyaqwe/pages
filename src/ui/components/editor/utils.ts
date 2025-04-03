@@ -2,28 +2,6 @@ import type { EditorInstance } from "@/ui/components/editor/types"
 import { Fragment, type Node } from "@tiptap/pm/model"
 import type { EditorView } from "@tiptap/pm/view"
 
-export const stripHTML = (string: string) => string.replace(/<[^>]*>/g, "")
-
-export const isValidUrl = (url: string) => {
-   try {
-      new URL(url)
-      return true
-   } catch (_e) {
-      return false
-   }
-}
-
-export const getUrl = (str: string) => {
-   if (isValidUrl(str)) return str
-   try {
-      if (str.includes(".") && !str.includes(" ")) {
-         return new URL(`https://${str}`).toString()
-      }
-   } catch (_e) {
-      return null
-   }
-}
-
 // Get the text before a given position in markdown format
 export const getPrevText = (editor: EditorInstance, position: number) => {
    const nodes: Node[] = []

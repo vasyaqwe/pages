@@ -2,54 +2,63 @@ import { FOCUS_STYLES } from "@/ui/constants"
 import { cn } from "@/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
 
-const buttonVariants = cva(
-   `relative inline-flex cursor-(--cursor) items-center justify-center font-medium gap-1.5 leading-none overflow-hidden whitespace-nowrap 
-    disabled:opacity-70 disabled:cursor-not-allowed`,
+export const buttonVariants = cva(
+   [
+      "inline-flex cursor-(--cursor) items-center justify-center whitespace-nowrap text-base tracking-wide md:text-sm",
+      "transition-colors duration-100 disabled:opacity-80",
+   ],
    {
       variants: {
          variant: {
-            default: `bg-primary shadow-sm border border-transparent text-primary-foreground hover:bg-primary-hover`,
-            secondary: `bg-secondary border border-transparent text-secondary-foreground hover:bg-secondary-hover`,
-            "popover-item": `bg-transparent border border-transparent text-primary-foreground hover:bg-popover-hover aria-[current=page]:bg-popover-hover`,
-            destructive: `bg-elevated-2 border border-transparent text-foreground hover:text-destructive-foreground 
-            hover:bg-destructive`,
-            ghost: "border border-transparent hover:bg-elevated-2",
+            primary:
+               "bg-accent-6 font-[400] text-white shadow-[inset_0_-2px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.15))] shadow-text-2 hover:bg-accent-5 active:bg-accent-6",
+            secondary:
+               "border border-primary-5 bg-primary-3 font-[425] shadow-[inset_0_-1.5px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] shadow-text-1 hover:border-primary-4 hover:bg-primary-2 active:bg-primary-3",
+            ghost: "bg-transparent font-[425] hover:bg-primary-3 aria-[current=page]:bg-primary-3",
+            destructive: "bg-red-100 text-red-900 hover:bg-red-200/80",
          },
          size: {
-            default: "h-8 rounded-[10px] px-3 text-sm",
-            sm: "h-8 rounded-lg px-2.5 text-sm",
-            lg: "h-10 gap-2 rounded-xl px-4 text-base",
-            xl: "h-11 gap-3 rounded-xl px-4 text-base",
-            icon: "size-9 gap-0 rounded-full",
-            "icon-sm": "size-8 gap-0 rounded-full",
+            sm: "h-8 rounded-md md:h-7",
+            md: "h-9 rounded-lg md:h-8",
+            lg: "h-10 rounded-xl md:h-9",
+         },
+         kind: {
+            default: "gap-2 px-3",
+            icon: "aspect-square w-auto justify-center",
+         },
+         shape: {
+            square: "",
+            circle: "!rounded-full",
          },
       },
-      compoundVariants: [
-         {
-            className: FOCUS_STYLES,
-         },
-      ],
       defaultVariants: {
-         variant: "default",
-         size: "default",
+         variant: "primary",
+         size: "md",
+         kind: "default",
+         shape: "square",
       },
    },
 )
 
-function Button({
+interface Props
+   extends React.ComponentProps<"button">,
+      VariantProps<typeof buttonVariants> {}
+
+export function Button({
    className,
    variant,
    size,
-   ref,
+   shape,
+   kind,
    ...props
-}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants>) {
+}: Props) {
    return (
       <button
-         className={cn(buttonVariants({ variant, size, className }))}
-         ref={ref}
+         className={cn(
+            buttonVariants({ variant, size, shape, kind, className }),
+            FOCUS_STYLES,
+         )}
          {...props}
       />
    )
 }
-
-export { Button, buttonVariants }

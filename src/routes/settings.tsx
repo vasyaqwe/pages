@@ -34,8 +34,8 @@ function RouteComponent() {
                navigate({ to: ".", search: { tab }, replace: true })
             }
          >
-            <div className="flex min-h-[53px] items-center justify-between border-border border-t pt-5">
-               <h1 className="text-foreground/80">SETTINGS</h1>
+            <div className="flex min-h-[53px] items-center justify-between border-neutral border-t pt-5">
+               <h1 className="font-secondary text-xl">Settings</h1>
                <TabsList>
                   <TabsTab value={"general"}>General</TabsTab>
                   <TabsTab value={"preferences"}>Preferences</TabsTab>
@@ -43,7 +43,7 @@ function RouteComponent() {
             </div>
             <TabsPanel value={"general"}>
                <div className="mt-10">
-                  <h2 className="mt-5 font-semibold text-xl">
+                  <h2 className="mt-5 font-secondary text-xl">
                      Export/import notes
                   </h2>
                   <p className="mt-3 mb-6 text-foreground/70 text-sm">
@@ -68,10 +68,10 @@ function RouteComponent() {
                         URL.revokeObjectURL(url)
                      }}
                   >
-                     DOWNLOAD
+                     Download
                   </Button>
                   <Button onClick={() => fileRef.current?.click()}>
-                     UPLOAD
+                     Upload
                   </Button>
                   <input
                      className="invisible"
@@ -108,7 +108,7 @@ function RouteComponent() {
                   />
                </div>
                <div className="mt-10">
-                  <h2 className="mt-5 font-semibold text-xl">About</h2>
+                  <h2 className="mt-5 font-secondary text-xl">About</h2>
                   <p className="mt-3 mb-6 text-foreground/70 text-sm">
                      Pages' data is stored in the browser's storage. <br /> Be
                      cautios when clearing it, and export pages beforehand with
@@ -151,7 +151,7 @@ function RouteComponent() {
             </TabsPanel>
             <TabsPanel value={"preferences"}>
                <div className="mt-10">
-                  <h2 className="mt-5 font-semibold text-xl">
+                  <h2 className="mt-5 font-secondary text-xl">
                      Use pointer cursors
                   </h2>
                   <p className="mt-3 mb-6 text-foreground/70 text-sm">

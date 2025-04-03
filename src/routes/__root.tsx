@@ -1,17 +1,13 @@
-import tap from "@/assets/sound/tap.wav"
 import type { DatabaseClient } from "@/database"
 import { useLocalStorage } from "@/interactions/use-local-storage"
-import { Button, buttonVariants } from "@/ui/components/button"
+import { buttonVariants } from "@/ui/components/button"
 import {
    Link,
    Outlet,
    createRootRouteWithContext,
    useMatches,
 } from "@tanstack/react-router"
-import { useTheme } from "next-themes"
 import * as React from "react"
-import { useHotkeys } from "react-hotkeys-hook"
-import { useSound } from "use-sound"
 
 export const Route = createRootRouteWithContext<{
    db: DatabaseClient
@@ -40,41 +36,17 @@ function RootComponent() {
       document.documentElement.style.setProperty("--cursor", cursor)
    }, [])
 
-   const { resolvedTheme, setTheme } = useTheme()
-   React.useEffect(() => {
-      if (resolvedTheme === "dark") {
-         document
-            .querySelector('meta[name="theme-color"]')
-            ?.setAttribute("content", "#0a0a0b")
-      } else {
-         document
-            .querySelector('meta[name="theme-color"]')
-            ?.setAttribute("content", "#FFFFFF")
-      }
-   }, [resolvedTheme])
-
-   const [play] = useSound(tap)
-
-   useHotkeys(
-      "t",
-      (e) => {
-         e.preventDefault()
-         setTheme(resolvedTheme === "light" ? "dark" : "light")
-         play()
-      },
-      [resolvedTheme],
-   )
-
    return (
       <Meta>
          <main>
             <Outlet />
-            <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center gap-0.5 rounded-full bg-popover p-1 text-popover-foreground shadow-lg">
+            <div className="-translate-x-1/2 fixed bottom-6 left-1/2 flex items-center gap-0.5 rounded-full border border-primary-4 bg-background p-1 shadow-lg">
                <Link
                   to={"/"}
                   className={buttonVariants({
-                     variant: "popover-item",
-                     size: "icon",
+                     kind: "icon",
+                     shape: "circle",
+                     variant: "ghost",
                   })}
                >
                   <svg
@@ -96,13 +68,14 @@ function RootComponent() {
                      </g>
                   </svg>
                </Link>
-               <Button
+               {/* <Button
                   onClick={() => {
                      setTheme(resolvedTheme === "light" ? "dark" : "light")
                      play()
                   }}
-                  size={"icon"}
-                  variant={"popover-item"}
+                  kind={"icon"}
+                  shape={"circle"}
+                  variant={"ghost"}
                >
                   {resolvedTheme === "light" ? (
                      <svg
@@ -161,12 +134,13 @@ function RootComponent() {
                         />
                      </svg>
                   )}
-               </Button>
+               </Button> */}
                <Link
                   to={"/settings"}
                   className={buttonVariants({
-                     variant: "popover-item",
-                     size: "icon",
+                     kind: "icon",
+                     shape: "circle",
+                     variant: "ghost",
                   })}
                >
                   <svg

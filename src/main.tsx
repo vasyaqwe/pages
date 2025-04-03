@@ -12,7 +12,6 @@ import {
    useMatch,
    useRouter,
 } from "@tanstack/react-router"
-import { ThemeProvider } from "next-themes"
 import * as React from "react"
 import ReactDOM from "react-dom/client"
 import { routeTree } from "./routeTree.gen"
@@ -26,7 +25,7 @@ const router = createRouter({
    defaultPendingComponent: () => (
       <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 w-full">
          <Icons.feather className="mx-auto size-6 animate-fade-in opacity-0 drop-shadow-md [--animation-delay:100ms]" />
-         <h1 className="mt-5 animate-fade-in text-center font-medium text-foreground/80 opacity-0 duration-500 [--animation-delay:500ms]">
+         <h1 className="mt-5 animate-fade-in text-center font-medium opacity-0 duration-500 [--animation-delay:500ms]">
             Workspace is loading..
          </h1>
       </div>
@@ -89,25 +88,13 @@ declare module "@tanstack/react-router" {
    }
 }
 
-if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-   // biome-ignore lint/style/noNonNullAssertion: ...
-   ReactDOM.createRoot(document.getElementById("app")!).render(
-      <div className="p-5">
-         <h1>Safari is currently not supported</h1>
-         <p>Please try in Chrome, Firefox or other modern browsers</p>
-      </div>,
-   )
-} else {
-   // biome-ignore lint/style/noNonNullAssertion: ...
-   ReactDOM.createRoot(document.getElementById("app")!).render(
+// biome-ignore lint/style/noNonNullAssertion: ...
+const rootElement = document.getElementById("app")!
+if (!rootElement.innerHTML || rootElement.innerHTML.trim().length === 0) {
+   const root = ReactDOM.createRoot(rootElement)
+   root.render(
       <React.StrictMode>
-         <ThemeProvider
-            defaultTheme="light"
-            attribute="class"
-            disableTransitionOnChange
-         >
-            <RouterProvider router={router} />
-         </ThemeProvider>
+         <RouterProvider router={router} />
       </React.StrictMode>,
    )
 }

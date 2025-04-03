@@ -1,1 +1,1 @@
-export { type Editor as EditorInstance } from "@tiptap/core"
+export type { Editor as EditorInstance } from "@tiptap/core"

@@ -37,12 +37,12 @@ function DrawerContent({
                }
             }}
             className={cn(
-               "group fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[88svh] flex-col rounded-t-xl border border-border bg-background md:max-h-[94svh]",
-               "shadow-[0_-8px_10px_0px_hsl(var(--foreground)/.06)] [&[data-vaul-drawer-direction=right]]:right-0 [&[data-vaul-drawer-direction=right]]:left-auto",
+               "group fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[88svh] flex-col rounded-t-xl border border-neutral bg-background md:max-h-[94svh]",
+               "shadow-[0_-8px_10px_0px_hsl(var(--foreground)/.03)] [&[data-vaul-drawer-direction=right]]:right-0 [&[data-vaul-drawer-direction=right]]:left-auto",
                "[&[data-vaul-drawer-direction=right]]:mt-0 [&[data-vaul-drawer-direction=right]]:h-screen [&[data-vaul-drawer-direction=right]]:max-h-full",
                "[&[data-vaul-drawer-direction=right]]:top-2 [&[data-vaul-drawer-direction=right]]:right-2 [&[data-vaul-drawer-direction=right]]:h-auto",
                "[&[data-vaul-drawer-direction=right]]:bottom-2 [&[data-vaul-drawer-direction=right]]:after:hidden",
-               "[&[data-vaul-drawer-direction=right]]:w-[90%] sm:[&[data-vaul-drawer-direction=right]]:w-[475px] [&[data-vaul-drawer-direction=right]]:rounded-2xl",
+               "[&[data-vaul-drawer-direction=right]]:w-[90%] [&[data-vaul-drawer-direction=right]]:rounded-2xl sm:[&[data-vaul-drawer-direction=right]]:w-[475px]",
                className,
             )}
             {...props}
@@ -62,7 +62,7 @@ function DrawerHeader({
    return (
       <header
          className={cn(
-            "grid gap-1.5 border-border border-b px-4 pt-3 pb-4 md:py-3",
+            "grid gap-1.5 border-neutral border-b px-4 pt-3 pb-4 md:py-3",
             className,
          )}
          {...props}

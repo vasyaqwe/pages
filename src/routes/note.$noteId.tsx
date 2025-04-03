@@ -106,15 +106,16 @@ function RouteComponent() {
    const [play] = useSound(whoosh)
 
    return (
-      <div className="absolute inset-0 bg-elevated-1 p-2.5">
-         <div className="h-full overflow-y-auto rounded-2xl border border-border bg-background shadow-2xl">
+      <div className="absolute inset-0 bg-primary-2/75 p-2.5">
+         <div className="h-full overflow-y-auto rounded-2xl border border-neutral bg-background shadow-2xl">
             <div className="flex items-center justify-between p-3 pb-0 lg:p-4 lg:pb-0">
                <Link
                   to={"/"}
                   className={cn(
                      buttonVariants({
                         variant: "ghost",
-                        size: "icon-sm",
+                        kind: "icon",
+                        shape: "circle",
                      }),
                   )}
                >
@@ -132,7 +133,8 @@ function RouteComponent() {
                      play()
                   }}
                   variant={"destructive"}
-                  size={"icon-sm"}
+                  kind={"icon"}
+                  shape={"circle"}
                >
                   <Icons.trash className="size-4" />
                </Button>
@@ -145,7 +147,7 @@ function RouteComponent() {
                   onChange={async (e) =>
                      await debouncedSaveTitle(e.target.value)
                   }
-                  className="h-10 w-full border-none bg-transparent font-bold text-2xl outline-hidden"
+                  className="h-10 w-full border-none bg-transparent font-bold font-secondary text-2xl outline-hidden"
                   placeholder="Title"
                   name="title"
                   type="text"

@@ -36,16 +36,17 @@ function RouteComponent() {
 
    return (
       <div className="container py-8 md:py-12">
-         <div className="flex items-center justify-between border-border border-t pt-5">
-            <p className="text-foreground/80">
-               {notes.length === 0 ? "EMPTY" : `${notes.length} PAGES`}
+         <div className="flex items-center justify-between border-neutral border-t pt-5">
+            <p className="font-secondary text-xl">
+               {notes.length === 0
+                  ? "Empty"
+                  : `${notes.length} ${notes.length === 1 ? "page" : "pages"}`}
             </p>
-
             <CreateNote />
          </div>
          <div className="mt-10">
             {notes.length === 0 ? (
-               <p className="mt-16 text-center text-foreground/70 text-lg">
+               <p className="mt-16 text-center text-foreground/70">
                   Write some pages.
                </p>
             ) : (
@@ -66,14 +67,14 @@ function NoteItem({ note }: { note: Note }) {
       <Link
          to={"/note/$noteId"}
          params={{ noteId: note.id }}
-         className="relative isolate mt-6 block w-full cursor-(--cursor) before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-2xl hover:before:bg-elevated-1"
+         className="relative isolate mt-6 block w-full cursor-(--cursor) before:absolute before:inset-[-12px_-12px_-12px_-12px] before:rounded-2xl before:transition-colors before:duration-100 hover:before:bg-primary-2"
          key={note.id}
       >
          <div className="relative z-[1]">
-            <p className="line-clamp-1 break-all font-semibold text-lg leading-tight">
+            <p className="break-all font-secondary text-[1.2rem] leading-[1.1]">
                {note.title}
             </p>
-            <p className="mt-1.5 text-foreground/65 text-xs">
+            <p className="mt-1.5 text-foreground/75 text-xs">
                {formatDateRelative(note.createdAt)}
             </p>
          </div>
@@ -97,7 +98,7 @@ function CreateNote() {
       >
          <DrawerTrigger className={buttonVariants()}>
             <Icons.feather className="size-4" />
-            WRITE
+            Write
          </DrawerTrigger>
          <DrawerContent className="h-full">
             <DrawerTitle className="sr-only">Write a new note</DrawerTitle>
@@ -123,7 +124,7 @@ function CreateNote() {
                      required
                      ref={titleRef}
                      autoFocus
-                     className="h-10 w-full border-none bg-transparent font-bold text-2xl outline-hidden"
+                     className="h-10 w-full border-none bg-transparent font-bold font-secondary text-2xl outline-hidden"
                      placeholder="Title"
                      name="title"
                      type="text"
@@ -169,7 +170,7 @@ function CreateNote() {
                         placeholder="Write details (markdown supported)"
                      />
                   </EditorRoot>
-                  <Button className="mt-auto">DONE</Button>
+                  <Button className="mt-auto">Done</Button>
                </form>
             </div>
          </DrawerContent>

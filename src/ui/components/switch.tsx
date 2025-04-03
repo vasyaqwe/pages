@@ -19,7 +19,7 @@ function Switch({
             play()
          }}
          className={cn(
-            "inline-flex h-[23px] w-[38px] cursor-(--cursor) items-center rounded-full bg-muted shadow-xs data-checked:bg-primary data-checked:hover:bg-primary-hover hover:bg-muted-hover",
+            "inline-flex h-[23px] w-[38px] cursor-(--cursor) items-center rounded-full bg-primary-6 shadow-xs hover:bg-primary-5 data-checked:bg-accent-6 data-checked:hover:bg-accent-5",
             FOCUS_STYLES,
             className,
          )}
