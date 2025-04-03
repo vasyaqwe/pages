@@ -95,7 +95,6 @@ export const EditorContent = React.forwardRef<
                   }}
                   editorProps={{
                      ...editorProps,
-
                      handleDOMEvents: {
                         ...editorProps?.handleDOMEvents,
                      },

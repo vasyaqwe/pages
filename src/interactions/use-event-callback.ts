@@ -1,4 +1,3 @@
-import { useIsomorphicLayoutEffect } from "@/interactions/use-isomorphic-layout-effect"
 import * as React from "react"
 
 export function useEventCallback<Args extends unknown[], R>(
@@ -14,7 +13,7 @@ export function useEventCallback<Args extends unknown[], R>(
       throw new Error("Cannot call an event handler while rendering.")
    })
 
-   useIsomorphicLayoutEffect(() => {
+   React.useLayoutEffect(() => {
       ref.current = fn
    }, [fn])
 

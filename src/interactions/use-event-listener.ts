@@ -1,4 +1,3 @@
-import { useIsomorphicLayoutEffect } from "@/interactions/use-isomorphic-layout-effect"
 import * as React from "react"
 
 // MediaQueryList Event based useEventListener interface
@@ -91,7 +90,7 @@ function useEventListener<
    // Create a ref that stores handler
    const savedHandler = React.useRef(handler)
 
-   useIsomorphicLayoutEffect(() => {
+   React.useLayoutEffect(() => {
       savedHandler.current = handler
    }, [handler])
 

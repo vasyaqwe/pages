@@ -3,15 +3,19 @@ import { note } from "@/note/schema"
 import { Button } from "@/ui/components/button"
 import { Switch } from "@/ui/components/switch"
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/ui/components/tabs"
+import { v, validator } from "@/validator"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-import { zodValidator } from "@tanstack/zod-adapter"
 import * as React from "react"
-import { z } from "zod"
 
 export const Route = createFileRoute("/settings")({
    component: RouteComponent,
-   validateSearch: zodValidator(
-      z.object({ tab: z.enum(["general", "preferences"]).catch("general") }),
+   validateSearch: validator(
+      v.object({
+         tab: v.fallback(
+            v.optional(v.picklist(["general", "preferences"])),
+            "general",
+         ),
+      }),
    ),
 })
 
