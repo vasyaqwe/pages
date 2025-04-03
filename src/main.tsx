@@ -32,6 +32,7 @@ const router = createRouter({
    ),
    defaultNotFoundComponent: NotFound,
    defaultErrorComponent: CatchBoundary,
+   scrollRestoration: true,
 })
 
 function NotFound() {
