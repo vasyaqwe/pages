@@ -23,10 +23,10 @@ const router = createRouter({
    },
    defaultPreload: "render",
    defaultPendingComponent: () => (
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 w-full">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 mx-auto flex w-fit items-center justify-center gap-2.5">
          <Icons.feather className="mx-auto size-6 animate-fade-in opacity-0 drop-shadow-md [--animation-delay:100ms]" />
-         <h1 className="mt-5 animate-fade-in text-center font-medium opacity-0 duration-500 [--animation-delay:500ms]">
-            Workspace is loading..
+         <h1 className="animate-fade-in text-center font-medium font-secondary text-lg opacity-0 duration-500 [--animation-delay:500ms]">
+            Loading pages..
          </h1>
       </div>
    ),
